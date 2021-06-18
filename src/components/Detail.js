@@ -26,6 +26,12 @@ function Detail() {
           <img src='/images/group-icon.png' />
         </GroupWatchBUtton>
       </Controls>
+      <Subtitle>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, dolore?
+      </Subtitle>
+      <Description>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas error adipisci consectetur tenetur rem eaque alias corporis dolor odit recusandae incidunt cupiditate nesciunt atque aut nemo unde odio optio minima, officia dignissimos facilis exercitationem ad ullam earum. Velit tempore omnis possimus deleniti rerum, dignissimos aspernatur autem earum aut dolor facere ratione quos, quas architecto. Dignissimos voluptates id porro voluptatum aliquam nemo consequuntur excepturi itaque officiis, provident adipisci vero temporibus! Tempore aliquam voluptate vitae praesentium asperiores deleniti quae debitis saepe est?
+      </Description>
     </Container>
   );
 }
@@ -113,3 +119,18 @@ const AddButton = styled.button`
 `;
 
 const GroupWatchBUtton = styled(AddButton)``;
+
+
+const Subtitle = styled.div`
+  color: rgb(249,249,249);
+  font-size: 15px;
+  min-height: 20px;
+  margin-top: 26px;
+`
+
+const Description = styled.div`
+  line-height: 1.4;
+  font-size: 20px;
+  margin-top: 16px;
+  color: rgb(249,249,249);
+`

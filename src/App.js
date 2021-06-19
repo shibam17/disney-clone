@@ -9,13 +9,13 @@ import Login from "./components/Login";
 function App() {
   return (
     <div className='App'>
+      <Header />
       <Router>
-        <Header />
         <Switch>
           <Route path='/login'>
             <Login />
           </Route>
-          <Route path='/detail'>
+          <Route path='/detail/:id'>
             <Detail />
           </Route>
           <Route path='/'>

@@ -1,37 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { setMovies } from "../features/movie/movieSlice";
+import db from "../firebase";
 
 function Detail() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState();
+
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setMovie(doc.data())
+        }else{
+          
+        }
+      });
+  }, []);
+
+  console.log(movie);
+
   return (
     <Container>
-      <Background>
-        <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg' />
-      </Background>
-      <ImageTitle>
-        <img src='https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78' />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src='/images/play-icon-black.png' />
-          <span>PLAY</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src='/images/play-icon-white.png' />
-          <span>Trailer</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchBUtton>
-          <img src='/images/group-icon.png' />
-        </GroupWatchBUtton>
-      </Controls>
-      <Subtitle>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, dolore?
-      </Subtitle>
-      <Description>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas error adipisci consectetur tenetur rem eaque alias corporis dolor odit recusandae incidunt cupiditate nesciunt atque aut nemo unde odio optio minima, officia dignissimos facilis exercitationem ad ullam earum. Velit tempore omnis possimus deleniti rerum, dignissimos aspernatur autem earum aut dolor facere ratione quos, quas architecto. Dignissimos voluptates id porro voluptatum aliquam nemo consequuntur excepturi itaque officiis, provident adipisci vero temporibus! Tempore aliquam voluptate vitae praesentium asperiores deleniti quae debitis saepe est?
-      </Description>
+      {movie && (
+        <>
+          <Background>
+            <img src={movie.backgroundImg} />
+          </Background>
+          <ImageTitle>
+            <img src={movie.titleImg} />
+          </ImageTitle>
+          <Controls>
+            <PlayButton>
+              <img src='/images/play-icon-black.png' />
+              <span>PLAY</span>
+            </PlayButton>
+            <TrailerButton>
+              <img src='/images/play-icon-white.png' />
+              <span>Trailer</span>
+            </TrailerButton>
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+            <GroupWatchBUtton>
+              <img src='/images/group-icon.png' />
+            </GroupWatchBUtton>
+          </Controls>
+          <Subtitle>{movie.subTitle}</Subtitle>
+          <Description>{movie.description}</Description>
+        </>
+      )}
     </Container>
   );
 }
@@ -76,6 +98,7 @@ const ImageTitle = styled.div`
 const Controls = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 15px;
 `;
 
 const PlayButton = styled.button`
@@ -121,18 +144,17 @@ const AddButton = styled.button`
 
 const GroupWatchBUtton = styled(AddButton)``;
 
-
 const Subtitle = styled.div`
-  color: rgb(249,249,249);
+  color: rgb(249, 249, 249);
   font-size: 15px;
   min-height: 20px;
   margin-top: 26px;
-`
+`;
 
 const Description = styled.div`
   line-height: 1.4;
   font-size: 20px;
   margin-top: 16px;
-  color: rgb(249,249,249);
+  color: rgb(249, 249, 249);
   max-width: 850px;
-`
+`;

@@ -9,8 +9,9 @@ import Login from "./components/Login";
 function App() {
   return (
     <div className='App'>
-      <Header />
       <Router>
+        <Header />
+
         <Switch>
           <Route path='/login'>
             <Login />
